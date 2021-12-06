@@ -1,6 +1,6 @@
 # Specify the GCP Provider
 provider "google" {
-  credentials = file("/home/mitok/TerraPractice/Credentials/gcp.json")
+  credentials = file(var.credentials_path)
   project = var.project_id
   region  = var.region
 }

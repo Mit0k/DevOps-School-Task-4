@@ -1,2 +1,3 @@
-ssh-keygen -t rsa -f ~/.ssh/GCP/gcp_terra -C mitok_alexander -N ""
+#!/bin/bash
+ssh-keygen -t rsa -f $1 -C $2 -N "" <<< y
 sleep 1

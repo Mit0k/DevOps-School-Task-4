@@ -1,4 +1,3 @@
-
 # Creates a GCP VM Instance.
 resource "google_compute_instance" "vm" {
   name         = var.name
@@ -19,8 +18,13 @@ resource "google_compute_instance" "vm" {
   }
   metadata_startup_script = data.template_file.apache2.rendered
 }
-
-
+# Providing SSH keys
+resource "google_compute_project_metadata" "my_ssh_key" {
+  depends_on = [null_resource.ssh-generator]
+  metadata = {
+    ssh-keys = "${var.gcp_instance_username}:${data.local_file.ssh-key-public.content}"
+  }
+}
 
 data "template_file" "apache2" {
   template = file("./template/install_apache2.tpl")
